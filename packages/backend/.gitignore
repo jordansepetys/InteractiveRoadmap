@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+
+# Database
+storage/*.db
+storage/*.db-shm
+storage/*.db-wal
+
+# Logs
+*.log
+logs/
+
+# Temp files
+temp/
+*.tmp

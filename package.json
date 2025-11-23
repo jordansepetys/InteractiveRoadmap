@@ -1,0 +1,28 @@
+{
+  "name": "storyforge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Azure DevOps Story Creation Assistant - Conversational AI for work item creation",
+  "workspaces": [
+    "packages/frontend",
+    "packages/backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "npm run dev --workspace=packages/backend",
+    "dev:frontend": "npm run dev --workspace=packages/frontend",
+    "build": "npm run build --workspace=packages/frontend",
+    "build:backend": "npm run build --workspace=packages/backend"
+  },
+  "devDependencies": {
+    "@types/dompurify": "^3.0.5",
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "dependencies": {
+    "dompurify": "^3.3.0"
+  }
+}
