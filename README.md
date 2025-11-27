@@ -31,6 +31,13 @@ A modern web application for visualizing and managing Azure DevOps features thro
 - **Work Item Details** - View state, assignee, and quick stats
 - **Direct ADO Links** - Open any work item in Azure DevOps
 
+### 📤 Export to HTML
+- **Self-Contained Files** - Export roadmap or stage gate as standalone HTML files
+- **Full Interactivity** - Click features to view descriptions, acceptance criteria, and details
+- **No Server Required** - Open exported files directly in any browser, works offline
+- **Shareable** - Email to stakeholders or upload to SharePoint - no deployment needed
+- **Print-Friendly** - Optimized styles for printing
+
 ### ⚙️ Azure DevOps Integration
 - **Direct API Integration** - Connects directly to Azure DevOps REST API
 - **Secure Credential Storage** - All credentials encrypted in SQLite (not in files)
@@ -163,6 +170,10 @@ npm run build
 - `GET /api/feature-visibility` - Get all features with visibility status
 - `POST /api/feature-visibility/update` - Update single feature visibility
 - `POST /api/feature-visibility/bulk-update` - Update multiple features
+
+### Export
+- `GET /api/export/roadmap-html` - Download roadmap as self-contained HTML
+- `GET /api/export/stagegate-html` - Download stage gate as self-contained HTML
 
 ### Backlog
 - `GET /api/ado/backlog` - Get hierarchical backlog tree
