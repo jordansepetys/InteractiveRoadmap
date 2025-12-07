@@ -92,9 +92,108 @@ router.get('/features', async (req, res) => {
           targetDate: fields['Microsoft.VSTS.Scheduling.TargetDate'] || null,
           createdDate: fields['System.CreatedDate'] || null,
           changedDate: fields['System.ChangedDate'] || null,
-          parentId: fields['System.Parent'] || null
+          parentId: fields['System.Parent'] || null,
+          progress: { completedEffort: 0, totalEffort: 0, percentage: 0 }
         };
       });
+
+    // Fetch child work items (PBIs) for all features to calculate effort-based progress
+    // Get all feature IDs
+    const featureIds = roadmapFeatures.map(f => f.id);
+
+    if (featureIds.length > 0) {
+      // Query child work items for all features using WorkItemLinks
+      const childWiql = `
+        SELECT [System.Id], [Target].[System.Id]
+        FROM WorkItemLinks
+        WHERE [Source].[System.Id] IN (${featureIds.join(',')})
+        AND [System.Links.LinkType] = 'System.LinkTypes.Hierarchy-Forward'
+        MODE (MustContain)
+      `;
+
+      try {
+        const childQueryResponse = await client.post(
+          `/${ado_project}/_apis/wit/wiql?api-version=7.1`,
+          { query: childWiql }
+        );
+
+        // Extract child work item IDs and their parent relationships
+        const workItemRelations = childQueryResponse.data.workItemRelations || [];
+        const childIds = workItemRelations
+          .filter(rel => rel.target && rel.source)
+          .map(rel => rel.target.id);
+
+        if (childIds.length > 0) {
+          // Build parent-child mapping
+          const parentChildMap = {};
+          workItemRelations
+            .filter(rel => rel.target && rel.source)
+            .forEach(rel => {
+              const parentId = rel.source.id;
+              const childId = rel.target.id;
+              if (!parentChildMap[parentId]) {
+                parentChildMap[parentId] = [];
+              }
+              parentChildMap[parentId].push(childId);
+            });
+
+          // Fetch child work items with effort fields
+          // Support both StoryPoints (Agile) and Effort (Scrum) fields
+          const childFields = [
+            'System.Id',
+            'System.State',
+            'System.Parent',
+            'Microsoft.VSTS.Scheduling.StoryPoints',
+            'Microsoft.VSTS.Scheduling.Effort'
+          ].join(',');
+
+          // Fetch in batches of 200
+          const uniqueChildIds = [...new Set(childIds)];
+          const childWorkItems = [];
+
+          for (let i = 0; i < uniqueChildIds.length; i += 200) {
+            const batchIds = uniqueChildIds.slice(i, i + 200);
+            const childResponse = await client.get(
+              `/${ado_project}/_apis/wit/workitems?ids=${batchIds.join(',')}&fields=${childFields}&api-version=7.1`
+            );
+            childWorkItems.push(...childResponse.data.value);
+          }
+
+          // Calculate progress for each feature based on child effort
+          const completedStates = ['Done', 'Closed', 'Resolved'];
+
+          roadmapFeatures.forEach(feature => {
+            const childIdsForFeature = parentChildMap[feature.id] || [];
+            let totalEffort = 0;
+            let completedEffort = 0;
+
+            childIdsForFeature.forEach(childId => {
+              const child = childWorkItems.find(c => c.id === childId);
+              if (child) {
+                // Use StoryPoints or Effort field (whichever is available)
+                const effort = child.fields['Microsoft.VSTS.Scheduling.StoryPoints']
+                  || child.fields['Microsoft.VSTS.Scheduling.Effort']
+                  || 0;
+                totalEffort += effort;
+
+                if (completedStates.includes(child.fields['System.State'])) {
+                  completedEffort += effort;
+                }
+              }
+            });
+
+            feature.progress = {
+              completedEffort,
+              totalEffort,
+              percentage: totalEffort > 0 ? Math.round((completedEffort / totalEffort) * 100) : 0
+            };
+          });
+        }
+      } catch (childError) {
+        console.error('Error fetching child work items for progress:', childError.message);
+        // Continue without progress data - features will have 0% progress
+      }
+    }
 
     // Sort features by StartDate (in memory)
     roadmapFeatures.sort((a, b) => {

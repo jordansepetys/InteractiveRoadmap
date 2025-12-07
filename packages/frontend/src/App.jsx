@@ -6,6 +6,7 @@ import BacklogPage from './pages/BacklogPage'
 import StageGatePage from './pages/StageGatePage'
 import RoadmapPage from './pages/RoadmapPage'
 import FeatureDetailPage from './pages/FeatureDetailPage'
+import InnovationFunnelPage from './pages/InnovationFunnelPage'
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/backlog" element={<BacklogPage />} />
           <Route path="/stagegate" element={<StageGatePage />} />
           <Route path="/roadmap" element={<RoadmapPage />} />
+          <Route path="/innovation" element={<InnovationFunnelPage />} />
           <Route path="/feature/:id" element={<FeatureDetailPage />} />
         </Route>
       </Routes>

@@ -64,6 +64,41 @@ function runMigrations(db) {
       db.prepare('ALTER TABLE settings ADD COLUMN process_template TEXT').run();
       console.log('  ✅ Added process_template column');
     }
+
+    // Migration 3: Create innovation_items table if it doesn't exist
+    const innovationTableCheck = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='innovation_items'").get();
+    if (!innovationTableCheck) {
+      console.log('  📝 Creating innovation_items table...');
+      db.exec(`
+        CREATE TABLE IF NOT EXISTS innovation_items (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          title TEXT NOT NULL,
+          description TEXT,
+          stage TEXT NOT NULL DEFAULT 'Intake',
+          stage_order INTEGER DEFAULT 0,
+          ado_feature_id INTEGER,
+          rice_reach INTEGER,
+          rice_impact INTEGER,
+          rice_confidence INTEGER,
+          rice_effort INTEGER,
+          rice_score REAL,
+          roi_estimate TEXT,
+          roi_notes TEXT,
+          owner TEXT,
+          requestor TEXT,
+          category TEXT,
+          tags TEXT,
+          status_notes TEXT,
+          rejection_reason TEXT,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+          updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+          stage_changed_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+        CREATE INDEX IF NOT EXISTS idx_innovation_stage ON innovation_items(stage);
+        CREATE INDEX IF NOT EXISTS idx_innovation_ado ON innovation_items(ado_feature_id);
+      `);
+      console.log('  ✅ Created innovation_items table');
+    }
   } catch (error) {
     console.error('❌ Migration failed:', error.message);
     // Don't throw - allow initialization to continue

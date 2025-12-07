@@ -10,6 +10,7 @@ import stageGateRoutes from './routes/stagegate.js';
 import roadmapRoutes from './routes/roadmap.js';
 import featureVisibilityRoutes from './routes/featureVisibility.js';
 import exportRoutes from './routes/export.js';
+import innovationRoutes from './routes/innovation.js';
 
 dotenv.config();
 
@@ -40,6 +41,7 @@ app.use('/api/stagegate', stageGateRoutes);
 app.use('/api/roadmap', roadmapRoutes);
 app.use('/api/feature-visibility', featureVisibilityRoutes);
 app.use('/api/export', exportRoutes);
+app.use('/api/innovation', innovationRoutes);
 
 // Error handling middleware (must be AFTER routes)
 app.use((err, req, res, next) => {
