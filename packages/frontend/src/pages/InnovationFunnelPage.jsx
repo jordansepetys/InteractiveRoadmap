@@ -46,25 +46,25 @@ const InnovationFunnelPage = () => {
   const owners = getOwners();
 
   return (
-    <div className="h-full flex flex-col bg-white">
+    <div className="h-full flex flex-col bg-white dark:bg-slate-900 transition-colors">
       {/* Header */}
-      <div className="flex-none px-6 py-4 border-b border-slate-200">
+      <div className="flex-none px-6 py-4 border-b border-slate-200 dark:border-slate-700">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-slate-900">Innovation Funnel</h1>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <h1 className="text-xl font-bold text-slate-900 dark:text-white">Innovation Funnel</h1>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               Portfolio Kanban for tracking intake projects through validation stages
             </p>
           </div>
           <div className="flex items-center gap-3">
             {/* View Toggle */}
-            <div className="flex items-center bg-slate-100 rounded-lg p-1">
+            <div className="flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg p-1">
               <button
                 onClick={() => setViewMode('board')}
                 className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
                   viewMode === 'board'
-                    ? 'bg-white text-slate-900 shadow-sm'
-                    : 'text-slate-500 hover:text-slate-700'
+                    ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
                 }`}
               >
                 Board
@@ -73,8 +73,8 @@ const InnovationFunnelPage = () => {
                 onClick={() => setViewMode('list')}
                 className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
                   viewMode === 'list'
-                    ? 'bg-white text-slate-900 shadow-sm'
-                    : 'text-slate-500 hover:text-slate-700'
+                    ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
                 }`}
               >
                 List
@@ -85,7 +85,7 @@ const InnovationFunnelPage = () => {
             <button
               onClick={handleRefresh}
               disabled={loading}
-              className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-md transition-colors disabled:opacity-50"
+              className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors disabled:opacity-50"
               title="Refresh"
             >
               <svg className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,7 +118,7 @@ const InnovationFunnelPage = () => {
               placeholder="Search items..."
               value={filters.search}
               onChange={(e) => setFilters({ search: e.target.value })}
-              className="w-full pl-10 pr-4 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 text-sm border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
 
@@ -126,7 +126,7 @@ const InnovationFunnelPage = () => {
           <select
             value={filters.category}
             onChange={(e) => setFilters({ category: e.target.value })}
-            className="px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-2 text-sm border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">All Categories</option>
             {categories.map(cat => (
@@ -138,7 +138,7 @@ const InnovationFunnelPage = () => {
           <select
             value={filters.owner}
             onChange={(e) => setFilters({ owner: e.target.value })}
-            className="px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-2 text-sm border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">All Owners</option>
             {owners.map(owner => (
@@ -150,7 +150,7 @@ const InnovationFunnelPage = () => {
           {(filters.search || filters.category || filters.owner) && (
             <button
               onClick={clearFilters}
-              className="text-sm text-slate-500 hover:text-slate-700"
+              className="text-sm text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
             >
               Clear filters
             </button>
@@ -158,7 +158,7 @@ const InnovationFunnelPage = () => {
 
           {/* Stats Summary */}
           {stats && (
-            <div className="ml-auto flex items-center gap-4 text-xs text-slate-500">
+            <div className="ml-auto flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400">
               <span>{stats.total} total items</span>
               {stats.averageRiceScore && (
                 <span>Avg RICE: {stats.averageRiceScore}</span>

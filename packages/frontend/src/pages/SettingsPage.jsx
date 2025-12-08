@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useSettingsStore from '../stores/settingsStore';
 import useFeatureVisibilityStore from '../stores/featureVisibilityStore';
+import useThemeStore from '../stores/themeStore';
 
 export default function SettingsPage() {
   const {
@@ -37,6 +38,8 @@ export default function SettingsPage() {
     fetchFeatures,
     updateFeatureVisibility
   } = useFeatureVisibilityStore();
+
+  const { theme, setTheme } = useThemeStore();
 
   // Load settings on mount
   useEffect(() => {
@@ -134,11 +137,11 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 p-8 transition-colors">
       {/* Back Button */}
       <Link
         to="/"
-        className="inline-flex items-center gap-2 mb-6 px-4 py-2 text-gray-700 hover:text-gray-900 bg-white/80 hover:bg-white rounded-full shadow-md hover:shadow-lg transition-all"
+        className="inline-flex items-center gap-2 mb-6 px-4 py-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white bg-white/80 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-800 rounded-full shadow-md hover:shadow-lg transition-all"
       >
         <svg
           className="w-5 h-5"
@@ -157,10 +160,10 @@ export default function SettingsPage() {
       </Link>
 
       <div className="max-w-3xl mx-auto">
-        <div className="bg-white shadow-sm rounded-lg">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
-            <p className="mt-1 text-sm text-gray-600">
+        <div className="bg-white dark:bg-slate-800 shadow-sm rounded-lg transition-colors">
+          <div className="px-6 py-4 border-b border-gray-200 dark:border-slate-700">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Settings</h1>
+            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
               Configure your Azure DevOps credentials
             </p>
           </div>
@@ -274,9 +277,66 @@ export default function SettingsPage() {
             </div>
           </div>
 
+          {/* Appearance Settings */}
+          <div className="border-t border-gray-200 pt-6">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+              Appearance
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              Customize the look and feel of the application
+            </p>
+
+            <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-slate-800 rounded-lg">
+              <div>
+                <h3 className="text-sm font-medium text-gray-900 dark:text-white">Dark Mode</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Switch between light and dark themes
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setTheme('light')}
+                  className={`p-2 rounded-lg transition-colors ${
+                    theme === 'light'
+                      ? 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300'
+                      : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+                  }`}
+                  title="Light mode"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => setTheme('dark')}
+                  className={`p-2 rounded-lg transition-colors ${
+                    theme === 'dark'
+                      ? 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300'
+                      : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+                  }`}
+                  title="Dark mode"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => {
+                    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                    setTheme(systemTheme);
+                  }}
+                  className="px-3 py-1.5 text-xs font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-slate-700 rounded transition-colors"
+                  title="Use system preference"
+                >
+                  System
+                </button>
+              </div>
+            </div>
+          </div>
+
           {/* Feature Visibility Settings */}
-          <div>
-            <h2 className="text-lg font-semibold text-gray-900 mb-2">
+          <div className="border-t border-gray-200 pt-6">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
               Feature Visibility
             </h2>
             <p className="text-sm text-gray-600 mb-4">

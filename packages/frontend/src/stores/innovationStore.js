@@ -14,15 +14,15 @@ export const INNOVATION_STAGES = [
   'Rejected'
 ];
 
-// Stage colors for UI
+// Stage colors for UI (with dark mode support)
 export const STAGE_COLORS = {
-  'Intake': { bg: 'bg-slate-100', border: 'border-slate-300', text: 'text-slate-700', badge: 'bg-slate-200' },
-  'Triage': { bg: 'bg-amber-50', border: 'border-amber-300', text: 'text-amber-700', badge: 'bg-amber-200' },
-  'Discovery': { bg: 'bg-blue-50', border: 'border-blue-300', text: 'text-blue-700', badge: 'bg-blue-200' },
-  'Ready for Build': { bg: 'bg-indigo-50', border: 'border-indigo-300', text: 'text-indigo-700', badge: 'bg-indigo-200' },
-  'In Flight': { bg: 'bg-green-50', border: 'border-green-300', text: 'text-green-700', badge: 'bg-green-200' },
-  'Parked': { bg: 'bg-purple-50', border: 'border-purple-300', text: 'text-purple-700', badge: 'bg-purple-200' },
-  'Rejected': { bg: 'bg-red-50', border: 'border-red-300', text: 'text-red-700', badge: 'bg-red-200' }
+  'Intake': { bg: 'bg-slate-100 dark:bg-slate-800', border: 'border-slate-300 dark:border-slate-600', text: 'text-slate-700 dark:text-slate-300', badge: 'bg-slate-200 dark:bg-slate-700' },
+  'Triage': { bg: 'bg-amber-50 dark:bg-amber-900/20', border: 'border-amber-300 dark:border-amber-700', text: 'text-amber-700 dark:text-amber-400', badge: 'bg-amber-200 dark:bg-amber-800/50' },
+  'Discovery': { bg: 'bg-blue-50 dark:bg-blue-900/20', border: 'border-blue-300 dark:border-blue-700', text: 'text-blue-700 dark:text-blue-400', badge: 'bg-blue-200 dark:bg-blue-800/50' },
+  'Ready for Build': { bg: 'bg-indigo-50 dark:bg-indigo-900/20', border: 'border-indigo-300 dark:border-indigo-700', text: 'text-indigo-700 dark:text-indigo-400', badge: 'bg-indigo-200 dark:bg-indigo-800/50' },
+  'In Flight': { bg: 'bg-green-50 dark:bg-green-900/20', border: 'border-green-300 dark:border-green-700', text: 'text-green-700 dark:text-green-400', badge: 'bg-green-200 dark:bg-green-800/50' },
+  'Parked': { bg: 'bg-purple-50 dark:bg-purple-900/20', border: 'border-purple-300 dark:border-purple-700', text: 'text-purple-700 dark:text-purple-400', badge: 'bg-purple-200 dark:bg-purple-800/50' },
+  'Rejected': { bg: 'bg-red-50 dark:bg-red-900/20', border: 'border-red-300 dark:border-red-700', text: 'text-red-700 dark:text-red-400', badge: 'bg-red-200 dark:bg-red-800/50' }
 };
 
 const useInnovationStore = create((set, get) => ({

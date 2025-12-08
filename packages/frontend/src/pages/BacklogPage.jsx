@@ -133,17 +133,17 @@ export default function BacklogPage() {
   };
 
   return (
-    <div className="h-full flex flex-col bg-white">
+    <div className="h-full flex flex-col bg-white dark:bg-slate-900 transition-colors">
       {/* Header */}
-      <div className="flex-none px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+      <div className="flex-none px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-slate-900">Backlog</h1>
-          <p className="text-xs text-slate-500 mt-0.5">Manage work items and hierarchy.</p>
+          <h1 className="text-xl font-bold text-slate-900 dark:text-white">Backlog</h1>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Manage work items and hierarchy.</p>
         </div>
 
         <div className="flex items-center gap-4">
           {/* View Switcher */}
-          <div className="flex bg-slate-100 p-1 rounded-lg">
+          <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
             {[
               { id: 'grouped', label: 'Tree' },
               { id: 'list', label: 'List' },
@@ -155,7 +155,7 @@ export default function BacklogPage() {
                 onClick={() => setViewMode(v.id)}
                 className={`
                   px-3 py-1 text-xs font-medium rounded-md transition-all
-                  ${viewMode === v.id ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}
+                  ${viewMode === v.id ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'}
                 `}
               >
                 {v.label}
@@ -177,7 +177,7 @@ export default function BacklogPage() {
       </div>
 
       {/* Content Area */}
-      <div className="flex-1 flex flex-col min-h-0 bg-slate-50 overflow-hidden">
+      <div className="flex-1 flex flex-col min-h-0 bg-slate-50 dark:bg-slate-800 overflow-hidden">
         {/* Filters Bar */}
         <BacklogFilters onFiltersChange={setFilters} workItems={workItems} />
 
@@ -192,7 +192,7 @@ export default function BacklogPage() {
               <button onClick={fetchBacklog} className="text-sm underline">Try again</button>
             </div>
           ) : (
-            <div className="min-h-full bg-white">
+            <div className="min-h-full bg-white dark:bg-slate-900">
                {viewMode === 'grouped' && (
                  <div className="pb-20">
                    {filteredHierarchy.length > 0 ? renderTree(filteredHierarchy) : (

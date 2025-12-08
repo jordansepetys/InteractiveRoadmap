@@ -112,18 +112,18 @@ const InnovationBoard = () => {
       {/* Rejection Reason Modal */}
       {showRejectionModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-6">
-            <h3 className="text-lg font-semibold text-slate-900 mb-2">
+          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl w-full max-w-md p-6">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
               Reject Item
             </h3>
-            <p className="text-sm text-slate-600 mb-4">
+            <p className="text-sm text-slate-600 dark:text-slate-300 mb-4">
               Please provide a reason for rejecting "{showRejectionModal.item.title}"
             </p>
             <textarea
               value={rejectionReason}
               onChange={(e) => setRejectionReason(e.target.value)}
               placeholder="Reason for rejection..."
-              className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 resize-none"
+              className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 resize-none"
               rows={3}
             />
             <div className="flex justify-end gap-3 mt-4">
@@ -132,7 +132,7 @@ const InnovationBoard = () => {
                   setShowRejectionModal(null);
                   setRejectionReason('');
                 }}
-                className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-800"
+                className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white"
               >
                 Cancel
               </button>

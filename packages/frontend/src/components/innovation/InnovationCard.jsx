@@ -35,10 +35,10 @@ const InnovationCard = ({ item, onClick, isDragging = false }) => {
 
   // Get RICE score color
   const getRiceColor = () => {
-    if (!item.rice_score) return 'text-slate-400 bg-slate-100';
-    if (item.rice_score >= 15) return 'text-green-700 bg-green-100';
-    if (item.rice_score >= 5) return 'text-amber-700 bg-amber-100';
-    return 'text-red-700 bg-red-100';
+    if (!item.rice_score) return 'text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-700';
+    if (item.rice_score >= 15) return 'text-green-700 dark:text-green-400 bg-green-100 dark:bg-green-900/30';
+    if (item.rice_score >= 5) return 'text-amber-700 dark:text-amber-400 bg-amber-100 dark:bg-amber-900/30';
+    return 'text-red-700 dark:text-red-400 bg-red-100 dark:bg-red-900/30';
   };
 
   return (
@@ -48,16 +48,16 @@ const InnovationCard = ({ item, onClick, isDragging = false }) => {
       {...attributes}
       {...listeners}
       onClick={onClick}
-      className={`bg-white rounded-lg border border-slate-200 p-3 cursor-pointer hover:border-blue-400 hover:shadow-md transition-all ${
+      className={`bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-3 cursor-pointer hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-md transition-all ${
         isDragging ? 'shadow-lg rotate-2' : ''
       }`}
     >
       {/* Top Row: ID, Category, ADO Link */}
       <div className="flex items-center justify-between mb-2">
-        <span className="text-xs text-slate-400">#{item.id}</span>
+        <span className="text-xs text-slate-400 dark:text-slate-500">#{item.id}</span>
         <div className="flex items-center gap-2">
           {item.category && (
-            <span className="px-2 py-0.5 text-[10px] font-medium bg-slate-100 text-slate-600 rounded">
+            <span className="px-2 py-0.5 text-[10px] font-medium bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded">
               {item.category}
             </span>
           )}
@@ -72,22 +72,22 @@ const InnovationCard = ({ item, onClick, isDragging = false }) => {
       </div>
 
       {/* Title */}
-      <h4 className="text-sm font-medium text-slate-900 line-clamp-2 mb-2">
+      <h4 className="text-sm font-medium text-slate-900 dark:text-white line-clamp-2 mb-2">
         {item.title}
       </h4>
 
       {/* Owner */}
       {item.owner && (
         <div className="flex items-center gap-1.5 mb-2">
-          <div className="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center text-[10px] font-medium text-slate-600">
+          <div className="w-5 h-5 bg-slate-200 dark:bg-slate-600 rounded-full flex items-center justify-center text-[10px] font-medium text-slate-600 dark:text-slate-300">
             {item.owner.split(' ').map(n => n[0]).join('').slice(0, 2)}
           </div>
-          <span className="text-xs text-slate-500 truncate">{item.owner}</span>
+          <span className="text-xs text-slate-500 dark:text-slate-400 truncate">{item.owner}</span>
         </div>
       )}
 
       {/* Bottom Row: RICE Score, Days in Stage */}
-      <div className="flex items-center justify-between pt-2 border-t border-slate-100">
+      <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-700">
         {/* RICE Score */}
         <div className={`px-2 py-0.5 text-xs font-medium rounded ${getRiceColor()}`}>
           {item.rice_score !== null ? `RICE: ${item.rice_score.toFixed(1)}` : 'No RICE'}

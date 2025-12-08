@@ -85,13 +85,13 @@ const InnovationModal = ({ onClose }) => {
 
       {/* Modal */}
       <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-hidden" onClick={(e) => e.stopPropagation()}>
+        <div className="bg-white dark:bg-slate-900 rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-hidden" onClick={(e) => e.stopPropagation()}>
           {/* Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200">
-            <h2 className="text-lg font-semibold text-slate-900">Add New Idea</h2>
+          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-700">
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Add New Idea</h2>
             <button
               onClick={onClose}
-              className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded"
+              className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -104,7 +104,7 @@ const InnovationModal = ({ onClose }) => {
             <div className="p-6 space-y-5">
               {/* Title */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                   Title <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -112,14 +112,14 @@ const InnovationModal = ({ onClose }) => {
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   placeholder="What's the idea?"
-                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   autoFocus
                 />
               </div>
 
               {/* Description */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                   Description
                 </label>
                 <textarea
@@ -127,20 +127,20 @@ const InnovationModal = ({ onClose }) => {
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   rows={3}
                   placeholder="Describe the idea..."
-                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                  className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
                 />
               </div>
 
               {/* Stage & Category */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     Initial Stage
                   </label>
                   <select
                     value={formData.stage}
                     onChange={(e) => setFormData({ ...formData, stage: e.target.value })}
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
                     {INNOVATION_STAGES.map(stage => (
                       <option key={stage} value={stage}>{stage}</option>
@@ -148,7 +148,7 @@ const InnovationModal = ({ onClose }) => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     Category
                   </label>
                   <input
@@ -157,7 +157,7 @@ const InnovationModal = ({ onClose }) => {
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                     list="categories"
                     placeholder="e.g., Platform, UX"
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <datalist id="categories">
                     {existingCategories.map(cat => (
@@ -170,7 +170,7 @@ const InnovationModal = ({ onClose }) => {
               {/* Owner & Requestor */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     Owner
                   </label>
                   <input
@@ -178,11 +178,11 @@ const InnovationModal = ({ onClose }) => {
                     value={formData.owner}
                     onChange={(e) => setFormData({ ...formData, owner: e.target.value })}
                     placeholder="Who's responsible?"
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     Requestor
                   </label>
                   <input
@@ -190,20 +190,20 @@ const InnovationModal = ({ onClose }) => {
                     value={formData.requestor}
                     onChange={(e) => setFormData({ ...formData, requestor: e.target.value })}
                     placeholder="Who requested this?"
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
               </div>
 
               {/* RICE Metrics */}
-              <div className="p-4 bg-slate-50 rounded-lg">
+              <div className="p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-semibold text-slate-700">RICE Score (Optional)</h3>
+                  <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300">RICE Score (Optional)</h3>
                   {riceScore && (
                     <span className={`px-3 py-1 text-sm font-bold rounded ${
-                      riceScore >= 15 ? 'bg-green-100 text-green-700'
-                        : riceScore >= 5 ? 'bg-amber-100 text-amber-700'
-                        : 'bg-red-100 text-red-700'
+                      riceScore >= 15 ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
+                        : riceScore >= 5 ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400'
+                        : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400'
                     }`}>
                       {riceScore}
                     </span>
@@ -211,21 +211,21 @@ const InnovationModal = ({ onClose }) => {
                 </div>
                 <div className="grid grid-cols-4 gap-3">
                   <div>
-                    <label className="block text-xs text-slate-500 mb-1">Reach</label>
+                    <label className="block text-xs text-slate-500 dark:text-slate-400 mb-1">Reach</label>
                     <input
                       type="number"
                       value={formData.rice_reach}
                       onChange={(e) => setFormData({ ...formData, rice_reach: e.target.value })}
                       placeholder="Users"
-                      className="w-full px-2 py-1.5 text-sm border border-slate-200 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-2 py-1.5 text-sm border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-slate-500 mb-1">Impact</label>
+                    <label className="block text-xs text-slate-500 dark:text-slate-400 mb-1">Impact</label>
                     <select
                       value={formData.rice_impact}
                       onChange={(e) => setFormData({ ...formData, rice_impact: e.target.value })}
-                      className="w-full px-2 py-1.5 text-sm border border-slate-200 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-2 py-1.5 text-sm border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                       <option value="">1-3</option>
                       <option value="1">1 - Low</option>
@@ -234,7 +234,7 @@ const InnovationModal = ({ onClose }) => {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs text-slate-500 mb-1">Confidence</label>
+                    <label className="block text-xs text-slate-500 dark:text-slate-400 mb-1">Confidence</label>
                     <input
                       type="number"
                       min="0"
@@ -242,21 +242,21 @@ const InnovationModal = ({ onClose }) => {
                       value={formData.rice_confidence}
                       onChange={(e) => setFormData({ ...formData, rice_confidence: e.target.value })}
                       placeholder="%"
-                      className="w-full px-2 py-1.5 text-sm border border-slate-200 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-2 py-1.5 text-sm border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-slate-500 mb-1">Effort</label>
+                    <label className="block text-xs text-slate-500 dark:text-slate-400 mb-1">Effort</label>
                     <input
                       type="number"
                       value={formData.rice_effort}
                       onChange={(e) => setFormData({ ...formData, rice_effort: e.target.value })}
                       placeholder="Weeks"
-                      className="w-full px-2 py-1.5 text-sm border border-slate-200 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-2 py-1.5 text-sm border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                 </div>
-                <p className="text-[10px] text-slate-400 mt-2">
+                <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-2">
                   RICE = (Reach × Impact × Confidence%) / Effort
                 </p>
               </div>
@@ -264,7 +264,7 @@ const InnovationModal = ({ onClose }) => {
               {/* ROI */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     ROI Estimate
                   </label>
                   <input
@@ -272,11 +272,11 @@ const InnovationModal = ({ onClose }) => {
                     value={formData.roi_estimate}
                     onChange={(e) => setFormData({ ...formData, roi_estimate: e.target.value })}
                     placeholder="e.g., $50K annual savings"
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                     Link to ADO Feature (ID)
                   </label>
                   <input
@@ -284,14 +284,14 @@ const InnovationModal = ({ onClose }) => {
                     value={formData.ado_feature_id}
                     onChange={(e) => setFormData({ ...formData, ado_feature_id: e.target.value })}
                     placeholder="e.g., 12345"
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
               </div>
 
               {/* Status Notes */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                   Initial Status Notes
                 </label>
                 <textarea
@@ -299,17 +299,17 @@ const InnovationModal = ({ onClose }) => {
                   onChange={(e) => setFormData({ ...formData, status_notes: e.target.value })}
                   rows={2}
                   placeholder="Where things are at..."
-                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                  className="w-full px-3 py-2 text-sm border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
                 />
               </div>
             </div>
 
             {/* Footer */}
-            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-200 bg-slate-50">
+            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800">
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-800"
+                className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white"
               >
                 Cancel
               </button>

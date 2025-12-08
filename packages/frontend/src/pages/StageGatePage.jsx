@@ -130,13 +130,13 @@ function StageGatePage() {
   };
 
   return (
-    <div className="h-full flex flex-col bg-white">
+    <div className="h-full flex flex-col bg-white dark:bg-slate-900 transition-colors">
       {/* Header */}
-      <div className="flex-none px-6 py-4 border-b border-slate-200">
+      <div className="flex-none px-6 py-4 border-b border-slate-200 dark:border-slate-700">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-slate-900">Stage Gate</h1>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <h1 className="text-xl font-bold text-slate-900 dark:text-white">Stage Gate</h1>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                Manage feature governance and flow.
             </p>
           </div>
